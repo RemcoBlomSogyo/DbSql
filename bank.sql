@@ -3,7 +3,7 @@
 CREATE DATABASE "Bank";
 
 CREATE TABLE "Address" (
-	"ID" 			serial PRIMARY KEY,
+	"ID" 			int IDENTITY(1,1) PRIMARY KEY,
 	"Street"		varchar(150) NULL,
 	"StreetNumber"		varchar(5) NOT NULL,
 	"ZipCode"		varchar(7) NOT NULL,
@@ -12,7 +12,7 @@ CREATE TABLE "Address" (
 
 /****** Create Client table ******/
 CREATE TABLE "Client" (
-	"ID" 			serial PRIMARY KEY,
+	"ID" 			int IDENTITY(1,1) PRIMARY KEY,
 	"ClientNumber"		varchar(10) NOT NULL,
 	"FirstName"		varchar(100) NOT NULL,
 	"MiddleName"		varchar(100) NULL,
@@ -21,7 +21,7 @@ CREATE TABLE "Client" (
 );
 
 CREATE TABLE "Account" (
-	"ID" 			serial PRIMARY KEY,
+	"ID" 			int IDENTITY(1,1) PRIMARY KEY,
 	"AccountNumber"		varchar(10) NOT NULL,
 	"Balance"		float NOT NULL,
 	"Type"			char(1) NOT NULL,
@@ -31,7 +31,7 @@ CREATE TABLE "Account" (
 
 /****** Create PaymentAuthorization table ******/
 CREATE TABLE "PaymentAuthorization" (
-	"ID" 			serial PRIMARY KEY,
+	"ID" 			int IDENTITY(1,1) PRIMARY KEY,
 	"Amount"		float NOT NULL,
 	"ExecutionDayOfMonth"	int NOT NULL,
 	"CreationDate"		date NOT NULL,
@@ -42,7 +42,7 @@ CREATE TABLE "PaymentAuthorization" (
 
 /****** Create AccountTransaction table ******/
 CREATE TABLE "AccountTransaction" (
-	"ID" 			serial PRIMARY KEY,
+	"ID" 			int IDENTITY(1,1) PRIMARY KEY,
 	"Amount"		float NOT NULL,
 	"Description"		text NULL,
 	"Date"			date NOT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE "AccountTransaction" (
 
 /****** Create Loan table ******/
 CREATE TABLE "Loan" (
-	"ID" 			serial PRIMARY KEY,
+	"ID" 			int IDENTITY(1,1) PRIMARY KEY,
 	"Amount"		float NOT NULL,
 	"ContractDate"		date NOT NULL,
 	"ExpirationDate"	date NOT NULL,
@@ -67,7 +67,7 @@ CREATE TABLE "Loan" (
 
 /****** Create Payment table ******/
 CREATE TABLE "Payment" (
-	"ID" 			serial PRIMARY KEY,
+	"ID" 			int IDENTITY(1,1) PRIMARY KEY,
 	"Amount"		float NOT NULL,
 	"Description"		text NULL,
 	"Date"			date NOT NULL,
@@ -75,9 +75,9 @@ CREATE TABLE "Payment" (
 );
 
 /****** Create New User bankuser ******/
-CREATE USER "bankuser" WITH PASSWORD 'P@ssword1';
+/*CREATE USER "bankuser" WITH PASSWORD = 'P@ssword1';*/
 
-GRANT ALL PRIVILEGES ON DATABASE "Bank" TO "bankuser";
+/*GRANT ALL PRIVILEGES ON DATABASE "Bank" TO "bankuser";*/
 
 /****** Insert data in Address table ******/
 INSERT INTO "Address" ("Street","StreetNumber","ZipCode","City")
@@ -167,7 +167,7 @@ INSERT INTO "Loan" ("Amount","ContractDate","ExpirationDate","NumberOfPayment","
 INSERT INTO "Loan" ("Amount","ContractDate","ExpirationDate","NumberOfPayment","LoanPercentage","LoanPenaltyPercentage","DateClosed","ClientID","AccountID")
      VALUES ('18000.00','2006-01-01','2021-01-01',180,8.5,11.7,null,6,6)
 INSERT INTO "Loan" ("Amount","ContractDate","ExpirationDate","NumberOfPayment","LoanPercentage","LoanPenaltyPercentage","DateClosed","ClientID","AccountID")
-     VALUES ('1200','2005-10-01','2006-04-01',6,7.5,9.9,2006-03-31,4,4)
+     VALUES ('1200','2005-10-01','2006-04-01',6,7.5,9.9,'2006-03-31',4,4)
 INSERT INTO "Loan" ("Amount","ContractDate","ExpirationDate","NumberOfPayment","LoanPercentage","LoanPenaltyPercentage","DateClosed","ClientID","AccountID")
      VALUES ('3000.00','2006-05-15','2009-10-15',5,7.1,9.6,null,4,4)
 ;
@@ -435,3 +435,5 @@ INSERT INTO "AccountTransaction" ("Amount","Description","Date","Type","Code","A
      VALUES ('1626.00','Standard money transfer','2006-08-15','C','MT',7);
 INSERT INTO "AccountTransaction" ("Amount","Description","Date","Type","Code","AccountID")
      VALUES ('2500.50','Standard withdraw','2006-08-19','D','MW',7);
+
+
